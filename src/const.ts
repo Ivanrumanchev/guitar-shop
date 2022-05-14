@@ -1,5 +1,7 @@
 export enum AppRoute {
   Root = '/',
+  Catalog = 'catalog',
+  CatalogPage = 'catalog/:page',
 }
 
 export enum Rating {
@@ -31,3 +33,7 @@ export enum HttpCode {
   BadRequest = 400,
   NotFound = 404,
 }
+
+export const CARDS_PER_PAGE = 9;
+
+export const DEFAULT_PAGE = 1;

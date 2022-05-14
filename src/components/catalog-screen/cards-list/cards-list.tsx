@@ -1,47 +1,28 @@
 import CardItem from '../card-item/card-item';
+import LoadingScreen from '../../loading-screen/loading-screen';
+import { useAppSelector } from '../../../hooks/store';
+import { loadingGuitarsSelector } from '../../../store/selectors';
+import { LoadingStatus } from '../../../const';
+import { GuitarDTO } from '../../../types/guitar';
 
-const cardsMocks = [
-  {
-    'id': 1,
-    'name': 'Честер Bass',
-    'vendorCode': 'SO757575',
-    'type': 'electric',
-    'description': 'Вариант для настоящих профессионалов. Двенадцатиструнный инструмент оснащён карбоновыми струнами и корпусом из массива ели.',
-    'previewImg': 'img/guitar-2.jpg',
-    'stringCount': 7,
-    'rating': 2,
-    'price': 56331,
-  },
-  {
-    'id': 2,
-    'name': 'fvvv Bass',
-    'vendorCode': 'SO757575',
-    'type': 'electric',
-    'description': 'Вариант для настоящих профессионалов. Двенадцатиструнный инструмент оснащён карбоновыми струнами и корпусом из массива ели.',
-    'previewImg': 'img/guitar-3.jpg',
-    'stringCount': 7,
-    'rating': 5,
-    'price': 542123,
-  },
-  {
-    'id': 3,
-    'name': 'Честер sss',
-    'vendorCode': 'SO757575',
-    'type': 'electric',
-    'description': 'Вариант для настоящих профессионалов. Двенадцатиструнный инструмент оснащён карбоновыми струнами и корпусом из массива ели.',
-    'previewImg': 'img/guitar-1.jpg',
-    'stringCount': 7,
-    'rating': 4,
-    'price': 123111,
-  },
-];
+type CardsListProps = {
+  guitars: GuitarDTO[];
+}
 
-function CardsList(): JSX.Element {
+function CardsList({ guitars }: CardsListProps): JSX.Element {
+  const isLoading = useAppSelector(loadingGuitarsSelector);
+
+  if (isLoading === LoadingStatus.Pending) {
+    return <LoadingScreen />;
+  }
+
   return (
     <div className="cards catalog__cards">
-      { cardsMocks.map((card) => (
-        <CardItem guitar={ card } key={ card.id } />
-      )) }
+      { guitars.length !== 0
+        ? guitars.map((card) => (
+          <CardItem guitar={ card } key={ card.id } />
+        ))
+        : 'Выбранные гитары отсутствуют, выберите другие условия поиска' }
     </div>
   );
 }

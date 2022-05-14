@@ -1,4 +1,4 @@
-import { getNumberImage } from '../../../utils/common';
+import { getNumberImage, getPrice } from '../../../utils/common';
 import { Rating } from '../../../const';
 import { GuitarDTO } from '../../../types/guitar';
 
@@ -62,7 +62,7 @@ function CardItem({ guitar }: CardItemProps): JSX.Element {
             Цена:
           </span>
 
-          { guitar.price.toLocaleString('ru') }
+          { getPrice(guitar) }
         </p>
       </div>
 

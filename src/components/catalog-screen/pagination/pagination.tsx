@@ -1,42 +1,54 @@
-function Pagination(): JSX.Element {
+import { Link } from 'react-router-dom';
+import { AppRoute, CARDS_PER_PAGE } from '../../../const';
+
+type PaginationProps = {
+  quantityGuitars: number;
+  currentPage: number;
+};
+
+const STEP = 1;
+
+function Pagination({ quantityGuitars, currentPage }: PaginationProps): JSX.Element {
+  const quantityPages = Math.ceil(quantityGuitars / CARDS_PER_PAGE);
+
+  const pageNumbers = Array.from({ length: quantityPages }, (v, k) => k + 1);
+
+  const isBefore = currentPage !== STEP;
+  const isNext = quantityGuitars !== 0 && currentPage !== quantityPages;
+
   return (
     <div className="pagination page-content__pagination">
       <ul className="pagination__list">
-        <li className="pagination__page pagination__page--active">
-          <a
+        { isBefore &&
+        <li className="pagination__page pagination__page--prev" id="prev">
+          <Link
             className="link pagination__page-link"
-            href="1"
+            to={ `/${AppRoute.Catalog}/${currentPage - STEP}` }
           >
-            1
-          </a>
-        </li>
+            Назад
+          </Link>
+        </li> }
 
-        <li className="pagination__page">
-          <a
-            className="link pagination__page-link"
-            href="2"
-          >
-            2
-          </a>
-        </li>
+        { pageNumbers.map((pageNumber) => (
+          <li className="pagination__page" key={ pageNumber }>
+            <Link
+              className={ `link pagination__page-link ${currentPage === pageNumber ? 'pagination__page--active' : ''}` }
+              to={ `/${AppRoute.Catalog}/${pageNumber}` }
+            >
+              { pageNumber }
+            </Link>
+          </li>
+        )) }
 
-        <li className="pagination__page">
-          <a
-            className="link pagination__page-link"
-            href="3"
-          >
-            3
-          </a>
-        </li>
-
+        { isNext &&
         <li className="pagination__page pagination__page--next" id="next">
-          <a
+          <Link
             className="link pagination__page-link"
-            href="2"
+            to={ `/${AppRoute.Catalog}/${currentPage + STEP}` }
           >
             Далее
-          </a>
-        </li>
+          </Link>
+        </li> }
       </ul>
     </div>
   );

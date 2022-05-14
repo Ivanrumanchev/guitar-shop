@@ -1,8 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import CatalogScreen from '../../pages/catalog-screen';
-import { AppRoute } from '../../const';
 import Layout from '../layout/layout';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { AppRoute, DEFAULT_PAGE } from '../../const';
 
 function App(): JSX.Element {
   return (
@@ -15,6 +15,12 @@ function App(): JSX.Element {
         >
           <Route
             path={ AppRoute.Root }
+            element={
+              <Navigate to={ `${AppRoute.Catalog}/${DEFAULT_PAGE}` } />
+            }
+          />
+          <Route
+            path={ AppRoute.CatalogPage }
             element={
               <CatalogScreen />
             }

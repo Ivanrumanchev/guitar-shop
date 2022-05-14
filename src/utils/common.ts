@@ -5,3 +5,13 @@ export const getNumberImage = (guitar: GuitarDTO) => {
     return guitar.previewImg.match(/\d+/);
   }
 };
+
+export const getPrice = (guitar : GuitarDTO) => {
+  if (guitar.price) {
+    return typeof guitar.price === 'number'
+      ? guitar.price.toLocaleString('ru')
+      : guitar.price;
+  }
+
+  return '';
+};
