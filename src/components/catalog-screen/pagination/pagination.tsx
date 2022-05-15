@@ -23,7 +23,7 @@ function Pagination({ quantityGuitars, currentPage }: PaginationProps): JSX.Elem
         <li className="pagination__page pagination__page--prev" id="prev">
           <Link
             className="link pagination__page-link"
-            to={ `/${AppRoute.Catalog}/${currentPage - STEP}` }
+            to={ `${AppRoute.Catalog}/${currentPage - STEP}` }
           >
             Назад
           </Link>
@@ -33,7 +33,7 @@ function Pagination({ quantityGuitars, currentPage }: PaginationProps): JSX.Elem
           <li className="pagination__page" key={ pageNumber }>
             <Link
               className={ `link pagination__page-link ${currentPage === pageNumber ? 'pagination__page--active' : ''}` }
-              to={ `/${AppRoute.Catalog}/${pageNumber}` }
+              to={ `${AppRoute.Catalog}/${pageNumber}` }
             >
               { pageNumber }
             </Link>
@@ -44,7 +44,7 @@ function Pagination({ quantityGuitars, currentPage }: PaginationProps): JSX.Elem
         <li className="pagination__page pagination__page--next" id="next">
           <Link
             className="link pagination__page-link"
-            to={ `/${AppRoute.Catalog}/${currentPage + STEP}` }
+            to={ `${AppRoute.Catalog}/${currentPage + STEP}` }
           >
             Далее
           </Link>

@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
+import Rate from '../../common/rate/rate';
 import { getNumberImage, getPrice } from '../../../utils/common';
-import { Rating } from '../../../const';
+import { AppRoute } from '../../../const';
 import { GuitarDTO } from '../../../types/guitar';
 
 type CardItemProps = {
@@ -8,10 +10,15 @@ type CardItemProps = {
 
 function CardItem({ guitar }: CardItemProps): JSX.Element {
   const numberImage = getNumberImage(guitar);
+  const price = getPrice(guitar);
 
-  const ratingVariants = Object.values(Rating).filter((value) => typeof value === 'number');
+  const rateDescription = {
+    className: 'product-card__rate',
+    width: '12',
+    height: '11',
+  };
 
-  const ratingWord = Rating[guitar.rating] ? Rating[guitar.rating] : guitar.rating;
+  const { name: guitarName, rating, stringCount, id } = guitar;
 
   return (
     <div className="product-card">
@@ -20,41 +27,18 @@ function CardItem({ guitar }: CardItemProps): JSX.Element {
         srcSet={ `img/content/catalog-product-${numberImage}@2x.jpg 2x` }
         width="75"
         height="190"
-        alt={ guitar.name }
+        alt={ guitarName }
       />
 
       <div className="product-card__info">
-        <div className="rate product-card__rate">
-          { ratingVariants.map((rate) => {
-            const isFull = rate <= guitar.rating;
-
-            return (
-              <svg
-                width="12"
-                height="11"
-                aria-hidden="true"
-                key={ rate }
-              >
-                <use xlinkHref={ `${isFull ? '#icon-full-star' : '#icon-star'}` }/>
-              </svg>
-            );
-          }) }
-
-          <p className="visually-hidden">
-            Рейтинг: { ratingWord }
-          </p>
-
-          <p className="rate__count">
-            <span className="visually-hidden">
-              Всего оценок:
-            </span>
-
-            { guitar.stringCount }
-          </p>
-        </div>
+        <Rate
+          rating={ rating }
+          stringCount={ stringCount }
+          rateDescription={ rateDescription }
+        />
 
         <p className="product-card__title">
-          { guitar.name }
+          { guitarName }
         </p>
 
         <p className="product-card__price">
@@ -62,17 +46,17 @@ function CardItem({ guitar }: CardItemProps): JSX.Element {
             Цена:
           </span>
 
-          { getPrice(guitar) }
+          { price && `${price} ₽` }
         </p>
       </div>
 
       <div className="product-card__buttons">
-        <a
+        <Link
           className="button button--mini"
-          href="/"
+          to={ `${AppRoute.Product}/${id}` }
         >
           Подробнее
-        </a>
+        </Link>
 
         <a
           className="button button--red button--mini button--add-to-cart"

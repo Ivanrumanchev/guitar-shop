@@ -1,7 +1,9 @@
 export enum AppRoute {
   Root = '/',
-  Catalog = 'catalog',
-  CatalogPage = 'catalog/:page',
+  Catalog = '/catalog',
+  CatalogPage = '/catalog/:page',
+  Product = '/product',
+  ProductId = '/product/:id',
 }
 
 export enum Rating {
@@ -14,6 +16,7 @@ export enum Rating {
 
 export enum NameSpace {
   CatalogData = 'CATALOG_DATA',
+  ProductData = 'PRODUCT_DATA',
 }
 
 export enum LoadingStatus {
@@ -22,7 +25,8 @@ export enum LoadingStatus {
 }
 
 export enum ApiActions {
-  FetchCatalog = 'data/fetchOffers',
+  FetchCatalog = 'data/fetchGuitars',
+  FetchProduct = 'data/fetchProduct',
 }
 
 export enum APIRoute {
@@ -37,3 +41,15 @@ export enum HttpCode {
 export const CARDS_PER_PAGE = 9;
 
 export const DEFAULT_PAGE = 1;
+
+export enum BroadcrumbsName {
+  Main = 'Главная',
+  Catalog = 'Каталог',
+  Product = 'Товар',
+}
+
+export enum GuitarType {
+  Acoustic = 'Акустическая гитара',
+  Electric = 'Электрогитара',
+  Ukulele = 'Укулеле',
+}

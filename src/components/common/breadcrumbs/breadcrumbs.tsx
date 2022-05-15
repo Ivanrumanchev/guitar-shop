@@ -1,23 +1,20 @@
-function Breadcrumbs(): JSX.Element {
+import { Link } from 'react-router-dom';
+import { BreadcrumbsType } from '../../../types/breadcrumbs';
+
+type BreadcrumbsProps = {
+  breadcrumbs: BreadcrumbsType[];
+};
+
+function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps): JSX.Element {
   return (
     <ul className="breadcrumbs page-content__breadcrumbs">
-      <li className="breadcrumbs__item">
-        <a
-          className="link"
-          href="./main.html"
-        >
-          Главная
-        </a>
-      </li>
-
-      <li className="breadcrumbs__item">
-        <a
-          className="link"
-          href="/"
-        >
-          Каталог
-        </a>
-      </li>
+      { breadcrumbs.map((breadcrumb) => (
+        <li className="breadcrumbs__item" key={ breadcrumb.name }>
+          <Link className="link" to={ breadcrumb.url }>
+            { breadcrumb.name }
+          </Link>
+        </li>
+      )) }
     </ul>
   );
 }

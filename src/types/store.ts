@@ -1,4 +1,3 @@
-import { SerializedError } from '@reduxjs/toolkit';
 import { store } from '../store/store.js';
 import { GuitarDTO } from './guitar.js';
 
@@ -9,6 +8,9 @@ export type AppDispatch = typeof store.dispatch;
 export type CatalogData = {
   loading: string,
   guitars: GuitarDTO[],
-  currentRequestId: undefined | string,
-  error: null | SerializedError,
+}
+
+export type ProductData = {
+  loading: string,
+  guitar: null | GuitarDTO,
 }

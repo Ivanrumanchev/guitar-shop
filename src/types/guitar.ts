@@ -1,3 +1,5 @@
+import { GuitarType } from '../const';
+
 export type GuitarDTO = {
   id: number,
   name: string,
@@ -9,3 +11,5 @@ export type GuitarDTO = {
   rating: number,
   price: number,
 };
+
+export type GuitarTypes = keyof typeof GuitarType;

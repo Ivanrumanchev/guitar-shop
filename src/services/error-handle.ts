@@ -3,8 +3,7 @@ import { toast } from 'react-toastify';
 import { HttpCode } from '../const';
 import { ErrorType } from '../types/error';
 
-
-export const errorServerHandle = (error: ErrorType): void => {
+export const errorServerHandle = (error: ErrorType): void | HttpCode => {
   if (!request.isAxiosError(error)) {
     throw error;
   }
@@ -18,7 +17,8 @@ export const errorServerHandle = (error: ErrorType): void => {
         break;
       case HttpCode.NotFound:
         toast.error(response.statusText);
-        break;
+
+        return HttpCode.NotFound;
     }
   }
 };

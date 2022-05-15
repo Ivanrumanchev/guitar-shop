@@ -8,7 +8,7 @@ import Pagination from '../components/catalog-screen/pagination/pagination';
 import { useAppDispatch, useAppSelector } from '../hooks/store';
 import { fetchGuitarsAction } from '../store/api-actions';
 import { guitarsSelector } from '../store/selectors';
-import { CARDS_PER_PAGE, DEFAULT_PAGE } from '../const';
+import { AppRoute, BroadcrumbsName, CARDS_PER_PAGE, DEFAULT_PAGE } from '../const';
 
 function CatalogScreen(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -26,13 +26,24 @@ function CatalogScreen(): JSX.Element {
   const firstGuitarIndex = lastGuitarIndex - CARDS_PER_PAGE;
   const currentGuitars = guitars.slice(firstGuitarIndex, lastGuitarIndex);
 
+  const breadcrumbs = [
+    {
+      name: BroadcrumbsName.Main,
+      url: AppRoute.Root,
+    },
+    {
+      name: BroadcrumbsName.Catalog,
+      url: AppRoute.Catalog,
+    },
+  ];
+
   return (
     <div className="container">
       <h1 className="page-content__title title title--bigger">
         Каталог гитар
       </h1>
 
-      <Breadcrumbs />
+      <Breadcrumbs breadcrumbs={ breadcrumbs } />
 
       <div className="catalog">
         <Filter />

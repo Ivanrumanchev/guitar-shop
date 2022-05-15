@@ -1,14 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { errorServerHandle } from '../services/error-handle';
 import { api } from './store';
-import { fetchGuitars, setLoading } from './catalog-data/catalog-data';
-import { ApiActions, APIRoute, LoadingStatus } from '../const';
+import { fetchGuitars, setCatalogLoading } from './catalog-data/catalog-data';
+import { fetchProduct, setProductLoading } from './product-data/product-data';
+import { ApiActions, APIRoute, HttpCode, LoadingStatus } from '../const';
 import { GuitarDTO } from '../types/guitar';
 
 export const fetchGuitarsAction = createAsyncThunk(
   ApiActions.FetchCatalog,
-  async (_,{ dispatch }) => {
-    dispatch(setLoading(LoadingStatus.Pending));
+  async (_, { dispatch }) => {
+    dispatch(setCatalogLoading(LoadingStatus.Pending));
 
     try {
       const { data } = await api.get<GuitarDTO[]>(APIRoute.Catalog);
@@ -18,5 +19,25 @@ export const fetchGuitarsAction = createAsyncThunk(
       errorServerHandle(error);
     }
 
-    dispatch(setLoading(LoadingStatus.Idle));
+    dispatch(setCatalogLoading(LoadingStatus.Idle));
+  });
+
+export const fetchProductAction = createAsyncThunk<void, number>(
+  ApiActions.FetchProduct,
+  async (id, { dispatch, rejectWithValue }) => {
+    dispatch(setProductLoading(LoadingStatus.Pending));
+
+    try {
+      const { data } = await api.get<GuitarDTO>(`${APIRoute.Catalog}/${id}`);
+
+      dispatch(fetchProduct(data));
+    } catch (error) {
+      const err = errorServerHandle(error);
+
+      if (err === HttpCode.NotFound) {
+        return rejectWithValue(err);
+      }
+    }
+
+    dispatch(setProductLoading(LoadingStatus.Idle));
   });
