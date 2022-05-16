@@ -1,18 +1,29 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { errorServerHandle } from '../services/error-handle';
 import { api } from './store';
-import { fetchGuitars, setCatalogLoading } from './catalog-data/catalog-data';
+import { fetchGuitars, setCatalogLoading, setTotalCount } from './catalog-data/catalog-data';
 import { fetchProduct, setProductLoading } from './product-data/product-data';
 import { ApiActions, APIRoute, HttpCode, LoadingStatus } from '../const';
 import { GuitarDTO } from '../types/guitar';
 
-export const fetchGuitarsAction = createAsyncThunk(
+type GuitarRequest = {
+  start: number,
+  end: number,
+}
+
+export const fetchGuitarsAction = createAsyncThunk<void, GuitarRequest>(
   ApiActions.FetchCatalog,
-  async (_, { dispatch }) => {
+  async (guitarRequest, { dispatch }) => {
     dispatch(setCatalogLoading(LoadingStatus.Pending));
 
     try {
-      const { data } = await api.get<GuitarDTO[]>(APIRoute.Catalog);
+      const path = `${APIRoute.Catalog}/?_start=${guitarRequest.start}&_end=${guitarRequest.end}`;
+
+      const { data, headers } = await api.get<GuitarDTO[]>(path);
+
+      const total = headers['x-total-count'];
+
+      dispatch(setTotalCount(+total));
 
       dispatch(fetchGuitars(data));
     } catch (error) {

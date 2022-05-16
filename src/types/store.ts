@@ -8,6 +8,7 @@ export type AppDispatch = typeof store.dispatch;
 export type CatalogData = {
   loading: string,
   guitars: GuitarDTO[],
+  totalCount: number,
 }
 
 export type ProductData = {

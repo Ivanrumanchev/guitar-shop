@@ -5,6 +5,7 @@ import { CatalogData } from '../../types/store';
 const initialState: CatalogData = {
   loading: LoadingStatus.Idle,
   guitars: [],
+  totalCount: 0,
 };
 
 export const catalogData = createSlice({
@@ -17,7 +18,10 @@ export const catalogData = createSlice({
     setCatalogLoading(state, action) {
       state.loading = action.payload;
     },
+    setTotalCount(state, action) {
+      state.totalCount = action.payload;
+    },
   },
 });
 
-export const { fetchGuitars, setCatalogLoading } = catalogData.actions;
+export const { fetchGuitars, setCatalogLoading, setTotalCount } = catalogData.actions;
