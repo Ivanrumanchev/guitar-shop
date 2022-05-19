@@ -1,15 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { errorServerHandle } from '../services/error-handle';
 import { api } from './store';
-import { fetchGuitars, setCatalogLoading, setTotalCount } from './catalog-data/catalog-data';
+import { fetchGuitars, setCatalogLoading, setTotalGuitarsCount } from './catalog-data/catalog-data';
 import { fetchProduct, setProductLoading } from './product-data/product-data';
-import { ApiActions, APIRoute, HttpCode, LoadingStatus } from '../const';
+import { setOpenModal } from './state-app/state-app';
+import { addNewReview, fetchReviews, setReviewsLoading, setTotalReviewsCount } from './reviews-data/reviews-data';
+import { ApiActions, APIRoute, HttpCode, LoadingStatus, ModalType } from '../const';
 import { GuitarDTO } from '../types/guitar';
-
-type GuitarRequest = {
-  start: number,
-  end: number,
-}
+import { NewReview, ReviewDTO } from '../types/review';
+import { GuitarRequest, ReviewRequest } from '../types/api-action';
 
 export const fetchGuitarsAction = createAsyncThunk<void, GuitarRequest>(
   ApiActions.FetchCatalog,
@@ -23,7 +22,7 @@ export const fetchGuitarsAction = createAsyncThunk<void, GuitarRequest>(
 
       const total = headers['x-total-count'];
 
-      dispatch(setTotalCount(+total));
+      dispatch(setTotalGuitarsCount(+total));
 
       dispatch(fetchGuitars(data));
     } catch (error) {
@@ -51,4 +50,62 @@ export const fetchProductAction = createAsyncThunk<void, number>(
     }
 
     dispatch(setProductLoading(LoadingStatus.Idle));
+  });
+
+export const fetchReviewsTotalCountAction = createAsyncThunk<number, number>(
+  ApiActions.FetchTotalCountReviews,
+  async (id) => {
+    try {
+      const path = `${APIRoute.Catalog}/${id}/comments/?_start=0&_end=1`;
+
+      const { headers } = await api.get(path);
+
+      const total = headers['x-total-count'];
+
+      return +total;
+    } catch (error) {
+      errorServerHandle(error);
+
+      return 0;
+    }
+  });
+
+export const fetchReviewsAction = createAsyncThunk<void, ReviewRequest>(
+  ApiActions.FetchReviews,
+  async (reviewRequest, { dispatch }) => {
+    dispatch(setReviewsLoading(LoadingStatus.Pending));
+
+    try {
+      const commentPath = `${APIRoute.Catalog}/${reviewRequest.id}/comments/`;
+      const queryPath = `?_start=${reviewRequest.start}&_end=${reviewRequest.end}&_sort=createAt&_order=desc`;
+      const path = `${commentPath}${queryPath}`;
+
+      const { data, headers } = await api.get<ReviewDTO>(path);
+
+      const total = headers['x-total-count'];
+
+      dispatch(setTotalReviewsCount(+total));
+
+      dispatch(fetchReviews(data));
+    } catch (error) {
+      errorServerHandle(error);
+    }
+
+    dispatch(setReviewsLoading(LoadingStatus.Idle));
+  });
+
+export const postReviewAction = createAsyncThunk<void, NewReview>(
+  ApiActions.PostReview,
+  async (reviewRequest, { dispatch, rejectWithValue }) => {
+    try {
+      const { data } = await api.post(APIRoute.Comments, reviewRequest);
+
+      dispatch(setOpenModal(ModalType.SuccessReview));
+
+      dispatch(addNewReview(data));
+    } catch (error) {
+      errorServerHandle(error);
+
+      return rejectWithValue('');
+    }
   });

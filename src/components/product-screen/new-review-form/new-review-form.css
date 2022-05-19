@@ -1,0 +1,22 @@
+.form-review__warning {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 0;
+}
+
+.form-review__row {
+  position: relative;
+  padding-bottom: 17px;
+  margin-bottom: -7px;
+}
+
+.form-review__row:last-of-type:not(:last-child) {
+  position: relative;
+  padding-bottom: 11px;
+  margin-bottom: -4px;
+}
+
+.form-review__row:last-child .form-review__warning {
+  padding-right: 4px;
+}

@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Rate from '../../common/rate/rate';
+import { useAppDispatch } from '../../../hooks/store';
+import { fetchReviewsTotalCountAction } from '../../../store/api-actions';
 import { getNumberImage, getPrice } from '../../../utils/common';
 import { AppRoute } from '../../../const';
 import { GuitarDTO } from '../../../types/guitar';
@@ -9,6 +12,9 @@ type CardItemProps = {
 };
 
 function CardItem({ guitar }: CardItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [reviewsCount, setReviewsCount] = useState(0);
+
   const numberImage = getNumberImage(guitar);
   const price = getPrice(guitar);
 
@@ -18,7 +24,16 @@ function CardItem({ guitar }: CardItemProps): JSX.Element {
     height: '11',
   };
 
-  const { name: guitarName, rating, stringCount, id } = guitar;
+  const { name: guitarName, rating, id } = guitar;
+
+  useEffect(() => {
+    dispatch(fetchReviewsTotalCountAction(id))
+      .then((res) => {
+        if (typeof res.payload === 'number') {
+          setReviewsCount(res.payload);
+        }
+      });
+  }, [dispatch, id, reviewsCount]);
 
   return (
     <div className="product-card">
@@ -33,7 +48,7 @@ function CardItem({ guitar }: CardItemProps): JSX.Element {
       <div className="product-card__info">
         <Rate
           rating={ rating }
-          stringCount={ stringCount }
+          reviewsCount={ reviewsCount }
           rateDescription={ rateDescription }
         />
 

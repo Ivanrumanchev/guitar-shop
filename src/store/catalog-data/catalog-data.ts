@@ -18,10 +18,10 @@ export const catalogData = createSlice({
     setCatalogLoading(state, action) {
       state.loading = action.payload;
     },
-    setTotalCount(state, action) {
+    setTotalGuitarsCount(state, action) {
       state.totalCount = action.payload;
     },
   },
 });
 
-export const { fetchGuitars, setCatalogLoading, setTotalCount } = catalogData.actions;
+export const { fetchGuitars, setCatalogLoading, setTotalGuitarsCount } = catalogData.actions;

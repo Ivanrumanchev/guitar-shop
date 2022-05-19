@@ -1,5 +1,7 @@
 import { store } from '../store/store.js';
+import { ModalType } from '../const.js';
 import { GuitarDTO } from './guitar.js';
+import { ReviewDTO } from './review.js';
 
 export type State = ReturnType<typeof store.getState>;
 
@@ -14,4 +16,14 @@ export type CatalogData = {
 export type ProductData = {
   loading: string,
   guitar: null | GuitarDTO,
+}
+
+export type ReviewsData = {
+  loading: string,
+  reviews: ReviewDTO[],
+  totalCount: number,
+}
+
+export type StateApp = {
+  openedModal: null | ModalType,
 }

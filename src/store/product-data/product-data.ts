@@ -17,7 +17,10 @@ export const productData = createSlice({
     setProductLoading(state, action) {
       state.loading = action.payload;
     },
+    clearProduct(state) {
+      state.guitar = null;
+    },
   },
 });
 
-export const { fetchProduct, setProductLoading } = productData.actions;
+export const { fetchProduct, setProductLoading, clearProduct } = productData.actions;

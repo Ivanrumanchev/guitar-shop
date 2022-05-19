@@ -34,3 +34,18 @@ export const getGuitarType = (guitar: GuitarDTO) => {
 
   return '';
 };
+
+export const getFormattedDate = (date: string) => {
+  if (!date) {
+    return '';
+  }
+
+  const dateComment = new Date(date);
+
+  const formatterDate = new Intl.DateTimeFormat('ru', {
+    month: 'long',
+    day: 'numeric',
+  });
+
+  return formatterDate.format(dateComment);
+};

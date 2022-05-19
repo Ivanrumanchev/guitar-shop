@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { getGuitarType } from '../../../utils/common';
 import { GuitarDTO } from '../../../types/guitar';
 
@@ -10,24 +11,43 @@ function Tabs({ guitar }: TabsProps): JSX.Element {
 
   const guitarType = getGuitarType(guitar);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleCharacteristicsClick = () => {
+    searchParams.delete('tabs');
+
+    setSearchParams(searchParams);
+  };
+
+  const handleDescriptionClick = () => {
+    searchParams.set('tabs', 'description');
+
+    setSearchParams(searchParams);
+  };
+
+  const isDescription = searchParams.has('tabs');
+
   return (
     <div className="tabs">
-      <a
-        className="button button--medium tabs__button"
-        href="#characteristics"
+      <button
+        className={ `button button--medium tabs__button ${isDescription ? 'button--black-border' : ''}` }
+        onClick={ handleCharacteristicsClick }
       >
         Характеристики
-      </a>
+      </button>
 
-      <a
-        className="button button--black-border button--medium tabs__button"
-        href="#description"
+      <button
+        className={ `button button--medium tabs__button ${isDescription ? '' : 'button--black-border'}` }
+        onClick={ handleDescriptionClick }
       >
         Описание
-      </a>
+      </button>
 
-      <div className="tabs__content" id="characteristics">
-        <table className="tabs__table">
+      <div
+        className="tabs__content"
+        id={ isDescription ? 'description' : 'characteristics' }
+      >
+        <table className={ `tabs__table ${isDescription ? 'hidden' : ''}` }>
           <tbody>
             <tr className="tabs__table-row">
               <td className="tabs__title">
@@ -61,7 +81,7 @@ function Tabs({ guitar }: TabsProps): JSX.Element {
           </tbody>
         </table>
 
-        <p className="tabs__product-description hidden">
+        <p className={ `tabs__product-description ${isDescription ? '' : 'hidden'}` }>
           { description }
         </p>
       </div>

@@ -9,10 +9,10 @@ type RateDescription = {
 type RateProps = {
   rating: number,
   rateDescription: RateDescription,
-  stringCount?: number,
+  reviewsCount?: number,
 };
 
-function Rate({ rating, stringCount, rateDescription }: RateProps): JSX.Element {
+function Rate({ rating, reviewsCount: stringCount, rateDescription }: RateProps): JSX.Element {
   const ratingVariants = Object.values(Rating).filter((value) => typeof value === 'number');
 
   const ratingWord = Rating[rating] ? Rating[rating] : rating;
