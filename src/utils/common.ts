@@ -49,3 +49,11 @@ export const getFormattedDate = (date: string) => {
 
   return formatterDate.format(dateComment);
 };
+
+export const getScrollToBottom = () => {
+  const scrollHeight = document.documentElement.scrollHeight;
+  const scrollTop = document.documentElement.scrollTop;
+  const windowHeight = window.innerHeight;
+
+  return scrollHeight - (scrollTop + windowHeight);
+};

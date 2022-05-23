@@ -1,10 +1,16 @@
+import { useCallback, useEffect, useState } from 'react';
 import ReviewItem from '../review-item/review-item';
 import LoadingScreen from '../../loading-screen/loading-screen';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import { loadingReviewsSelector, reviewsSelector, totalCountReviewsSelector } from '../../../store/selectors';
 import { fetchReviewsAction } from '../../../store/api-actions';
-import { LoadingStatus, ModalType, REVIEW_PER_STEP } from '../../../const';
 import { setOpenModal } from '../../../store/state-app/state-app';
+import { getScrollToBottom } from '../../../utils/common';
+import { LoadingStatus, ModalType, REVIEW_PER_STEP, SCROLL_LOADING_REVIEW } from '../../../const';
+
+type ReviewsProps = {
+  guitarId: number,
+}
 
 const Z_INDEX_BUTTON = 100;
 const scrollTop: ScrollToOptions = {
@@ -13,7 +19,9 @@ const scrollTop: ScrollToOptions = {
   behavior: 'smooth',
 };
 
-function Reviews(): JSX.Element {
+function Reviews({ guitarId }: ReviewsProps): JSX.Element {
+  const [fetching, setFetching] = useState(false);
+
   const dispatch = useAppDispatch();
 
   const reviews = useAppSelector(reviewsSelector);
@@ -27,7 +35,7 @@ function Reviews(): JSX.Element {
     dispatch(fetchReviewsAction({
       start: alreadyShow,
       end: alreadyShow + REVIEW_PER_STEP,
-      id: reviews[0].guitarId,
+      id: guitarId,
     }));
   };
 
@@ -39,7 +47,36 @@ function Reviews(): JSX.Element {
     window.scrollTo(scrollTop);
   };
 
-  if (isLoading === LoadingStatus.Pending) {
+  const scrollHandler = useCallback(() => {
+    const scrollToBottom = getScrollToBottom();
+
+    if (scrollToBottom < SCROLL_LOADING_REVIEW && isMore) {
+      setFetching(true);
+    }
+  }, [isMore]);
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler);
+
+    return () => {
+      document.removeEventListener('scroll', scrollHandler);
+    };
+  }, [scrollHandler]);
+
+  useEffect(() => {
+    if (fetching) {
+      dispatch(fetchReviewsAction({
+        start: alreadyShow,
+        end: alreadyShow + REVIEW_PER_STEP,
+        id: guitarId,
+      }))
+        .then(() => setFetching(false));
+    }
+  }, [dispatch, fetching, alreadyShow, guitarId]);
+
+  const isNotEmpty = reviewsCount !== 0;
+
+  if (isLoading === LoadingStatus.Pending && !isNotEmpty) {
     return <LoadingScreen />;
   }
 
@@ -56,7 +93,7 @@ function Reviews(): JSX.Element {
         Оставить отзыв
       </button>
 
-      { reviewsCount !== 0
+      { isNotEmpty
         ? reviews.map((review) => (
           <ReviewItem review={ review } key={ review.id } />
         ))

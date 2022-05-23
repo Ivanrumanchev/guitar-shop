@@ -64,6 +64,8 @@ export const REVIEW_PER_STEP = 3;
 
 export const INITIAL_NUMBER_REVIEW = 0;
 
+export const SCROLL_LOADING_REVIEW = 100;
+
 export const enum ModalType {
   SuccessReview = 'SUCCESS',
   Review = 'REVIEW',

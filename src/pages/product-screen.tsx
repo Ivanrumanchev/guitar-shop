@@ -49,7 +49,7 @@ function ProductScreen(): JSX.Element {
     return <LoadingScreen />;
   }
 
-  const { name } = guitar;
+  const { name, id } = guitar;
 
   const guitarName = name ? name : BroadcrumbsName.Product;
 
@@ -78,7 +78,7 @@ function ProductScreen(): JSX.Element {
 
       <ProductCard guitar={ guitar } />
 
-      <Reviews />
+      <Reviews guitarId={ id } />
     </div>
   );
 }

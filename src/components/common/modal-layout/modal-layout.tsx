@@ -30,6 +30,7 @@ function ModalLayout(): JSX.Element {
   });
 
   const isOpened = modalType !== null;
+  const hidden = isOpened ? 'block' : 'none';
 
   const heightModal = getHeightModal(modalType);
   const classNameModal = getClassNameModal(modalType);
@@ -37,6 +38,7 @@ function ModalLayout(): JSX.Element {
   return (
     <div
       style={{
+        display: hidden,
         position: 'relative',
         width: '550px',
         height: heightModal,
@@ -44,8 +46,8 @@ function ModalLayout(): JSX.Element {
       }}
     >
       <div className={ `modal ${isOpened ? 'is-active' : ''} modal-for-ui-kit ${classNameModal}` }>
-        <FocusLock>
-          <div className="modal__wrapper">
+        <div className="modal__wrapper">
+          <FocusLock>
             <div
               className="modal__overlay"
               data-close-modal
@@ -57,8 +59,8 @@ function ModalLayout(): JSX.Element {
 
             { modalType === ModalType.SuccessReview &&
             <ModalReviewSuccess /> }
-          </div>
-        </FocusLock>
+          </FocusLock>
+        </div>
       </div>
     </div>
   );

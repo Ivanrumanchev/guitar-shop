@@ -10,9 +10,7 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          element={
-            <Layout />
-          }
+          element={ <Layout /> }
         >
           <Route
             path={ AppRoute.Root }
@@ -36,9 +34,7 @@ function App(): JSX.Element {
 
           <Route
             path={ AppRoute.CatalogPage }
-            element={
-              <CatalogScreen />
-            }
+            element={ <CatalogScreen /> }
           />
 
           <Route
@@ -53,9 +49,7 @@ function App(): JSX.Element {
 
           <Route
             path={ AppRoute.ProductId }
-            element={
-              <ProductScreen />
-            }
+            element={ <ProductScreen /> }
           />
         </Route>
 
