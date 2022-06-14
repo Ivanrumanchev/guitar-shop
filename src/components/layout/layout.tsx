@@ -16,7 +16,6 @@ function Layout(): JSX.Element {
 
         <main className="page-content">
           <Outlet />
-
         </main>
 
         <Footer />

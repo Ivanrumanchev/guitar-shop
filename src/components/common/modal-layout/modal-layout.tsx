@@ -15,11 +15,13 @@ function ModalLayout(): JSX.Element {
 
   const closeModalClickHandler = () => {
     dispatch(setOpenModal(null));
+    document.body.style.overflow = 'auto';
   };
 
   const onKeydown = ({ key }: KeyboardEvent) => {
     if (key === 'Escape') {
       dispatch(setOpenModal(null));
+      document.body.style.overflow = 'auto';
     }
   };
 
@@ -44,6 +46,7 @@ function ModalLayout(): JSX.Element {
         height: heightModal,
         marginBottom: '50px',
       }}
+      data-testid="modal-layout"
     >
       <div className={ `modal ${isOpened ? 'is-active' : ''} modal-for-ui-kit ${classNameModal}` }>
         <div className="modal__wrapper">
@@ -51,6 +54,7 @@ function ModalLayout(): JSX.Element {
             <div
               className="modal__overlay"
               data-close-modal
+              data-testid="overlay"
               onClick={ closeModalClickHandler }
             />
 

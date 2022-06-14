@@ -71,6 +71,7 @@ function NewReviewForm({ guitarId }: NewReviewFormProps): JSX.Element {
                   name="userName"
                   type="text"
                   autoComplete="off"
+                  data-testid="userName"
                 />
 
                 <ErrorMessage
@@ -95,6 +96,7 @@ function NewReviewForm({ guitarId }: NewReviewFormProps): JSX.Element {
                       name="rating"
                       type="radio"
                       value={ rating.toString() }
+                      data-testid={ `rating-${rating.toString()}` }
                     />
 
                     <label
@@ -129,6 +131,7 @@ function NewReviewForm({ guitarId }: NewReviewFormProps): JSX.Element {
               name="advantage"
               type="text"
               autoComplete="off"
+              data-testid="advantage"
             />
 
             <ErrorMessage
@@ -151,6 +154,7 @@ function NewReviewForm({ guitarId }: NewReviewFormProps): JSX.Element {
               name="disadvantage"
               type="text"
               autoComplete="off"
+              data-testid="disadvantage"
             />
 
             <ErrorMessage
@@ -174,6 +178,7 @@ function NewReviewForm({ guitarId }: NewReviewFormProps): JSX.Element {
               rows={ 10 }
               autoComplete="off"
               as="textarea"
+              data-testid="comment"
             />
 
             <ErrorMessage

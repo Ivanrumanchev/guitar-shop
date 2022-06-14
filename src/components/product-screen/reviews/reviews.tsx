@@ -20,7 +20,7 @@ const scrollTop: ScrollToOptions = {
 };
 
 function Reviews({ guitarId }: ReviewsProps): JSX.Element {
-  const [fetching, setFetching] = useState(false);
+  const [isFetching, setFetching] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -41,6 +41,7 @@ function Reviews({ guitarId }: ReviewsProps): JSX.Element {
 
   const openModalClickHandler = () => {
     dispatch(setOpenModal(ModalType.Review));
+    document.body.style.overflow = 'hidden';
   };
 
   const scrollUpClickHandler = () => {
@@ -64,7 +65,7 @@ function Reviews({ guitarId }: ReviewsProps): JSX.Element {
   }, [scrollHandler]);
 
   useEffect(() => {
-    if (fetching) {
+    if (isFetching) {
       dispatch(fetchReviewsAction({
         start: alreadyShow,
         end: alreadyShow + REVIEW_PER_STEP,
@@ -72,7 +73,7 @@ function Reviews({ guitarId }: ReviewsProps): JSX.Element {
       }))
         .then(() => setFetching(false));
     }
-  }, [dispatch, fetching, alreadyShow, guitarId]);
+  }, [dispatch, isFetching, alreadyShow, guitarId]);
 
   const isNotEmpty = reviewsCount !== 0;
 

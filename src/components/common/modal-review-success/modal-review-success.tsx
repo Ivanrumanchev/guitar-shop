@@ -7,6 +7,7 @@ function ModalReviewSuccess(): JSX.Element {
 
   const closeModalClickHandler = () => {
     dispatch(setOpenModal(null));
+    document.body.style.overflow = 'auto';
   };
 
   return (

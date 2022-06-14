@@ -47,7 +47,7 @@ function Tabs({ guitar }: TabsProps): JSX.Element {
         className="tabs__content"
         id={ isDescription ? 'description' : 'characteristics' }
       >
-        <table className={ `tabs__table ${isDescription ? 'hidden' : ''}` }>
+        <table className={ `tabs__table ${isDescription ? 'hidden' : ''}` } data-testid="characteristics">
           <tbody>
             <tr className="tabs__table-row">
               <td className="tabs__title">

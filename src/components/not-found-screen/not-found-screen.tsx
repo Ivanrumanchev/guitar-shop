@@ -18,7 +18,7 @@ function NotFoundScreen(): JSX.Element {
       <hr />
 
       <div className="container">
-        <Link className="arrow-circle" to={AppRoute.Root}>
+        <Link className="arrow-circle" to={ AppRoute.Root }>
           Go to main page
 
           <svg className="arrow-circle-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">

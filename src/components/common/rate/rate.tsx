@@ -12,7 +12,7 @@ type RateProps = {
   reviewsCount?: number,
 };
 
-function Rate({ rating, reviewsCount: stringCount, rateDescription }: RateProps): JSX.Element {
+function Rate({ rating, reviewsCount, rateDescription }: RateProps): JSX.Element {
   const ratingVariants = Object.values(Rating).filter((value) => typeof value === 'number');
 
   const ratingWord = Rating[rating] ? Rating[rating] : rating;
@@ -29,7 +29,10 @@ function Rate({ rating, reviewsCount: stringCount, rateDescription }: RateProps)
             aria-hidden="true"
             key={ rate }
           >
-            <use xlinkHref={ `${isFull ? '#icon-full-star' : '#icon-star'}` }/>
+            <use
+              xlinkHref={ `${isFull ? '#icon-full-star' : '#icon-star'}` }
+              data-testid={ `${isFull ? 'full-star' : 'icon-star'}` }
+            />
           </svg>
         );
       }) }
@@ -38,13 +41,13 @@ function Rate({ rating, reviewsCount: stringCount, rateDescription }: RateProps)
         Рейтинг: { ratingWord }
       </p>
 
-      { Boolean(stringCount) &&
+      { Boolean(reviewsCount) &&
       <p className="rate__count">
         <span className="visually-hidden">
           Всего оценок:
         </span>
 
-        { stringCount }
+        { reviewsCount }
       </p> }
     </div>
   );

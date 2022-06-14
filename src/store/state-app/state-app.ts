@@ -11,12 +11,6 @@ export const stateApp = createSlice({
   initialState,
   reducers: {
     setOpenModal(state, action) {
-      if (action.payload) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'auto';
-      }
-
       state.openedModal = action.payload;
     },
   },
