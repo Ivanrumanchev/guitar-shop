@@ -20,7 +20,7 @@ function Filter(): JSX.Element {
               type="number"
               placeholder="1 000"
               id="priceMin"
-              name="от"
+              name="from"
             />
           </div>
 
@@ -33,7 +33,7 @@ function Filter(): JSX.Element {
               type="number"
               placeholder="30 000"
               id="priceMax"
-              name="до"
+              name="to"
             />
           </div>
         </div>
