@@ -1,4 +1,10 @@
+import { Link, useLocation } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 function Header(): JSX.Element {
+  const location = useLocation();
+  const isCatalogPage = location.pathname.includes(AppRoute.Catalog);
+
   return (
     <header className="header" id="header">
       <div className="container header__wrapper">
@@ -15,9 +21,12 @@ function Header(): JSX.Element {
         <nav className="main-nav">
           <ul className="main-nav__list">
             <li>
-              <a className="link main-nav__link link--current" href="/">
+              <Link
+                to={ AppRoute.Catalog }
+                className={`link main-nav__link ${isCatalogPage ? 'link--current' : ''}`}
+              >
                 Каталог
-              </a>
+              </Link>
             </li>
 
             <li>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import ReviewItem from '../review-item/review-item';
 import LoadingScreen from '../../loading-screen/loading-screen';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
@@ -20,7 +20,7 @@ const scrollTop: ScrollToOptions = {
 };
 
 function Reviews({ guitarId }: ReviewsProps): JSX.Element {
-  const [isFetching, setFetching] = useState(false);
+  const isFetching = useRef(false);
 
   const dispatch = useAppDispatch();
 
@@ -31,13 +31,13 @@ function Reviews({ guitarId }: ReviewsProps): JSX.Element {
   const alreadyShow = reviews.length;
   const isMore = alreadyShow < reviewsCount;
 
-  const showMoreClickHandler = () => {
+  const showMoreClickHandler = useCallback(() => {
     dispatch(fetchReviewsAction({
       start: alreadyShow,
       end: alreadyShow + REVIEW_PER_STEP,
       id: guitarId,
     }));
-  };
+  }, [alreadyShow, dispatch, guitarId]);
 
   const openModalClickHandler = () => {
     dispatch(setOpenModal(ModalType.Review));
@@ -51,10 +51,17 @@ function Reviews({ guitarId }: ReviewsProps): JSX.Element {
   const scrollHandler = useCallback(() => {
     const scrollToBottom = getScrollToBottom();
 
-    if (scrollToBottom < SCROLL_LOADING_REVIEW && isMore) {
-      setFetching(true);
+    if (scrollToBottom < SCROLL_LOADING_REVIEW && isMore && !isFetching.current) {
+      isFetching.current = true;
+
+      dispatch(fetchReviewsAction({
+        start: alreadyShow,
+        end: alreadyShow + REVIEW_PER_STEP,
+        id: guitarId,
+      }))
+        .then(() => isFetching.current = false);
     }
-  }, [isMore]);
+  }, [alreadyShow, dispatch, guitarId, isMore]);
 
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
@@ -63,17 +70,6 @@ function Reviews({ guitarId }: ReviewsProps): JSX.Element {
       document.removeEventListener('scroll', scrollHandler);
     };
   }, [scrollHandler]);
-
-  useEffect(() => {
-    if (isFetching) {
-      dispatch(fetchReviewsAction({
-        start: alreadyShow,
-        end: alreadyShow + REVIEW_PER_STEP,
-        id: guitarId,
-      }))
-        .then(() => setFetching(false));
-    }
-  }, [dispatch, isFetching, alreadyShow, guitarId]);
 
   const isNotEmpty = reviewsCount !== 0;
 
