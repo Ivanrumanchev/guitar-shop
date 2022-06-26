@@ -32,6 +32,7 @@ export const enum ApiActions {
   FetchReviews = 'data/fetchReviews',
   FetchTotalCountReviews = 'data/fetchTotalCountReviews',
   PostReview = 'data/postReview',
+  FetchSearchingGuitar = 'data/fetchSearchingGuitars',
 }
 
 export const enum APIRoute {

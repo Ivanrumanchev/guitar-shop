@@ -2264,7 +2264,8 @@ button,
           transition: color 0.3s ease;
 }
 
-.form-search__reset:hover {
+.form-search__reset:hover,
+.form-search__reset:focus {
   color: #c90606;
 }
 

@@ -136,3 +136,22 @@ export const postReviewAction = createAsyncThunk<
     return rejectWithValue('');
   }
 });
+
+export const searchGuitarsAction = createAsyncThunk<
+  GuitarDTO,
+  string,
+  {
+    dispatch: AppDispatch,
+    extra: AxiosInstance
+  }
+>(ApiActions.FetchSearchingGuitar, async (name, { extra: api }) => {
+  try {
+    const path = `${APIRoute.Catalog}?name_like=${name}`;
+
+    const { data } = await api.get(path);
+
+    return data;
+  } catch (error) {
+    errorServerHandle(error);
+  }
+});
