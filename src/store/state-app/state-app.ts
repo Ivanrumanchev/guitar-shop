@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace } from '../../constants/const';
 import { StateApp } from '../../types/store';
 
 const initialState: StateApp = {

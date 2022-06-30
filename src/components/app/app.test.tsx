@@ -8,7 +8,7 @@ import { Action } from '@reduxjs/toolkit';
 import App from './app';
 import { api } from '../../store/store';
 import { makeFakeCatalogData, makeFakeProductData } from '../../utils/mocks';
-import { AppRoute, DEFAULT_PAGE, LoadingStatus } from '../../const';
+import { AppRoute, DEFAULT_PAGE, LoadingStatus } from '../../constants/const';
 import { State } from '../../types/store';
 
 describe('Application Routing', () => {

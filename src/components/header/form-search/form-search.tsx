@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../../const';
-import { useAppDispatch } from '../../../hooks/store';
 import { searchGuitarsAction } from '../../../store/api-actions';
+import { useAppDispatch } from '../../../hooks/store';
+import { AppRoute } from '../../../constants/const';
 import { GuitarDTO } from '../../../types/guitar';
 
 function FormSearch(): JSX.Element {

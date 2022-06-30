@@ -1,4 +1,4 @@
-import { LoadingStatus } from '../../const';
+import { LoadingStatus } from '../../constants/const';
 import { makeFakeReviewData, makeFakeReviewsData } from '../../utils/mocks';
 import { addNewReview, clearReviews, fetchReviews, reviewsData, setReviewsLoading, setTotalReviewsCount } from './reviews-data';
 

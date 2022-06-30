@@ -6,7 +6,7 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import ProductCard from './product-card';
 import { makeFakeCatalogData, makeFakeProductData, makeFakeReviewsData } from '../../../utils/mocks';
-import { LoadingStatus } from '../../../const';
+import { LoadingStatus } from '../../../constants/const';
 
 describe('Component: ProductCard', () => {
   const history = createMemoryHistory();

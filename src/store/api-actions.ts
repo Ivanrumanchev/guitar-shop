@@ -6,7 +6,7 @@ import { fetchGuitars, setCatalogLoading, setTotalGuitarsCount } from './catalog
 import { fetchProduct, setProductLoading } from './product-data/product-data';
 import { setOpenModal } from './state-app/state-app';
 import { addNewReview, fetchReviews, setReviewsLoading, setTotalReviewsCount } from './reviews-data/reviews-data';
-import { ApiActions, APIRoute, HttpCode, LoadingStatus, ModalType } from '../const';
+import { ApiActions, APIRoute, HttpCode, LoadingStatus, ModalType } from '../constants/const';
 import { GuitarDTO } from '../types/guitar';
 import { NewReview, ReviewDTO } from '../types/review';
 import { GuitarRequest, ReviewRequest } from '../types/api-action';
@@ -18,11 +18,11 @@ export const fetchGuitarsAction = createAsyncThunk<
     dispatch: AppDispatch,
     extra: AxiosInstance,
   }
->(ApiActions.FetchCatalog, async (guitarRequest, { dispatch, extra: api }) => {
+>(ApiActions.FetchCatalog, async ({ start, end, rest }, { dispatch, extra: api }) => {
   dispatch(setCatalogLoading(LoadingStatus.Pending));
 
   try {
-    const path = `${APIRoute.Catalog}/?_start=${guitarRequest.start}&_end=${guitarRequest.end}`;
+    const path = `${APIRoute.Catalog}/?_start=${start}&_end=${end}${rest ? `&${rest}` : ''}`;
 
     const { data, headers } = await api.get<GuitarDTO[]>(path);
 

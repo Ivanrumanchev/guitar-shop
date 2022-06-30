@@ -1,4 +1,4 @@
-import { Rating } from '../../../const';
+import { Rating } from '../../../constants/const';
 
 type RateDescription = {
   className: string,

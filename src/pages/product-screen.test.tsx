@@ -11,7 +11,7 @@ import ProductScreen from './product-screen';
 import { createAPI } from '../services/api';
 import { fetchProduct } from '../store/product-data/product-data';
 import { makeFakeProductData } from '../utils/mocks';
-import { APIRoute, AppRoute, BroadcrumbsName, LoadingStatus } from '../const';
+import { APIRoute, AppRoute, BroadcrumbsName, LoadingStatus } from '../constants/const';
 import { State } from '../types/store';
 
 describe('Component: ProductScreen', () => {

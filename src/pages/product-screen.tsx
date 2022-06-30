@@ -10,7 +10,7 @@ import { fetchProductAction, fetchReviewsAction } from '../store/api-actions';
 import { loadingProductSelector, productSelector } from '../store/selectors';
 import { clearReviews } from '../store/reviews-data/reviews-data';
 import { clearProduct } from '../store/product-data/product-data';
-import { AppRoute, BroadcrumbsName, LoadingStatus, DEFAULT_PAGE, INITIAL_NUMBER_REVIEW, REVIEW_PER_STEP } from '../const';
+import { AppRoute, BroadcrumbsName, LoadingStatus, DEFAULT_PAGE, INITIAL_NUMBER_REVIEW, REVIEW_PER_STEP } from '../constants/const';
 
 function ProductScreen(): JSX.Element {
   const [notFound, setNotFound] = useState(false);

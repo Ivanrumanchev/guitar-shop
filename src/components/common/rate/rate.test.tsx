@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Rating } from '../../../const';
+import { Rating } from '../../../constants/const';
 import Rate from './rate';
 
 describe('Component: Rate', () => {

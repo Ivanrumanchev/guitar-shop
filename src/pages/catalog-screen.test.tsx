@@ -11,7 +11,7 @@ import CatalogScreen from './catalog-screen';
 import { createAPI } from '../services/api';
 import { fetchGuitars, setTotalGuitarsCount } from '../store/catalog-data/catalog-data';
 import { makeFakeCatalogData } from '../utils/mocks';
-import { APIRoute, LoadingStatus } from '../const';
+import { APIRoute, LoadingStatus } from '../constants/const';
 import { State } from '../types/store';
 
 describe('Component: CatalogScreen', () => {

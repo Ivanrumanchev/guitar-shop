@@ -5,7 +5,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import userEvent from '@testing-library/user-event';
 import ModalLayout from './modal-layout';
 import { makeFakeCatalogData, makeFakeProductData } from '../../../utils/mocks';
-import { NameSpace, LoadingStatus, ModalType } from '../../../const';
+import { NameSpace, LoadingStatus, ModalType } from '../../../constants/const';
 
 describe('Component: ModalLayout', () => {
   const mockStore = configureMockStore();

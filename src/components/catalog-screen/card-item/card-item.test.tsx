@@ -7,7 +7,7 @@ import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import CardItem from './card-item';
 import { makeFakeCatalogData, makeFakeProductData, makeFakeReviewsData } from '../../../utils/mocks';
-import { AppRoute, LoadingStatus } from '../../../const';
+import { AppRoute, LoadingStatus } from '../../../constants/const';
 
 describe('Component: CardItem', () => {
   const history = createMemoryHistory();

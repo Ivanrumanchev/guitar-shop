@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import ModalNewReview from './modal-new-review';
 import { makeFakeCatalogData, makeFakeProductData } from '../../../utils/mocks';
-import { LoadingStatus, ModalType } from '../../../const';
+import { LoadingStatus, ModalType } from '../../../constants/const';
 
 describe('Component: ModalNewReview', () => {
   const mockStore = configureMockStore();

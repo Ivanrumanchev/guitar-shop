@@ -8,7 +8,7 @@ import * as Redux from 'react-redux';
 import { Provider } from 'react-redux';
 import NewReviewForm from './new-review-form';
 import { makeFakeProductData, makeFakeReviewsData } from '../../../utils/mocks';
-import { APIRoute, LoadingStatus, ModalType, Rating, RequiredFieldMessage } from '../../../const';
+import { APIRoute, LoadingStatus, ModalType, Rating, RequiredFieldMessage } from '../../../constants/const';
 import { createAPI } from '../../../services/api';
 import { State } from '../../../types/store';
 import { setOpenModal } from '../../../store/state-app/state-app';

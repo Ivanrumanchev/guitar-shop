@@ -1,6 +1,7 @@
 export type GuitarRequest = {
   start: number,
   end: number,
+  rest?: string,
 }
 
 export type ReviewRequest = {

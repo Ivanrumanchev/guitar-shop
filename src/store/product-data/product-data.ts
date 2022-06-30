@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, LoadingStatus } from '../../const';
+import { NameSpace, LoadingStatus } from '../../constants/const';
 import { ProductData } from '../../types/store';
 
 const initialState: ProductData = {

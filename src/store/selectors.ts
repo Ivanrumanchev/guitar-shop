@@ -1,4 +1,4 @@
-import { NameSpace } from '../const';
+import { NameSpace } from '../constants/const';
 import { State } from '../types/store';
 
 export const guitarsSelector = (state: State) => state[NameSpace.CatalogData].guitars;

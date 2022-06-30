@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import { setOpenModal } from '../../../store/state-app/state-app';
 import { openedModalSelector } from '../../../store/selectors';
 import { getClassNameModal, getHeightModal } from '../../../utils/modal';
-import { ModalType } from '../../../const';
+import { ModalType } from '../../../constants/const';
 
 function ModalLayout(): JSX.Element {
   const dispatch = useAppDispatch();

@@ -1,4 +1,4 @@
-import { ModalType } from '../../const';
+import { ModalType } from '../../constants/const';
 import { setOpenModal, stateApp } from './state-app';
 
 describe('Reducer: stateApp', () => {

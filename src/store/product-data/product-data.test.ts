@@ -1,7 +1,7 @@
 import { clearProduct, fetchProduct, setProductLoading } from '../../store/product-data/product-data';
 import { productData } from './product-data';
 import { makeFakeProductData } from '../../utils/mocks';
-import { LoadingStatus } from '../../const';
+import { LoadingStatus } from '../../constants/const';
 
 const mockProductData = makeFakeProductData();
 

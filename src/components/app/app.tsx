@@ -3,7 +3,7 @@ import CatalogScreen from '../../pages/catalog-screen';
 import Layout from '../layout/layout';
 import ProductScreen from '../../pages/product-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { AppRoute, DEFAULT_PAGE } from '../../const';
+import { AppRoute, DEFAULT_PAGE } from '../../constants/const';
 
 function App(): JSX.Element {
   return (

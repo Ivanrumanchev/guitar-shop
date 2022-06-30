@@ -1,6 +1,6 @@
 import request from 'axios';
 import { toast } from 'react-toastify';
-import { HttpCode } from '../const';
+import { HttpCode } from '../constants/const';
 import { ErrorType } from '../types/error';
 
 export const errorServerHandle = (error: ErrorType): void | HttpCode => {

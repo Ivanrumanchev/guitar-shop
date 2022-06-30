@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import FormSearch from './form-search/form-search';
-import { AppRoute } from '../../const';
+import { AppRoute } from '../../constants/const';
 
 function Header(): JSX.Element {
   const location = useLocation();

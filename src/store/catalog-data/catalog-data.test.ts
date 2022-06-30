@@ -1,6 +1,6 @@
 import { catalogData, fetchGuitars, setCatalogLoading, setTotalGuitarsCount } from '../../store/catalog-data/catalog-data';
 import { makeFakeCatalogData } from '../../utils/mocks';
-import { LoadingStatus } from '../../const';
+import { LoadingStatus } from '../../constants/const';
 
 const mockCatalogData = makeFakeCatalogData();
 

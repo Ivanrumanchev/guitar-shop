@@ -9,7 +9,7 @@ import { fetchProduct } from './product-data/product-data';
 import { addNewReview, fetchReviews, setTotalReviewsCount } from './reviews-data/reviews-data';
 import { setOpenModal } from './state-app/state-app';
 import { makeFakeCatalogData, makeFakeNewReviewData, makeFakeProductData, makeFakeReviewsData } from '../utils/mocks';
-import { APIRoute } from '../const';
+import { APIRoute } from '../constants/const';
 import { State } from '../types/store';
 
 describe('Async actions', () => {

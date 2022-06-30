@@ -6,7 +6,7 @@ import { loadingReviewsSelector, reviewsSelector, totalCountReviewsSelector } fr
 import { fetchReviewsAction } from '../../../store/api-actions';
 import { setOpenModal } from '../../../store/state-app/state-app';
 import { getScrollToBottom } from '../../../utils/common';
-import { LoadingStatus, ModalType, REVIEW_PER_STEP, SCROLL_LOADING_REVIEW } from '../../../const';
+import { LoadingStatus, ModalType, REVIEW_PER_STEP, SCROLL_LOADING_REVIEW } from '../../../constants/const';
 
 type ReviewsProps = {
   guitarId: number,

@@ -1,5 +1,5 @@
 import { store } from '../store/store.js';
-import { ModalType } from '../const.js';
+import { ModalType } from '../constants/const.js';
 import { GuitarDTO } from './guitar.js';
 import { ReviewDTO } from './review.js';
 

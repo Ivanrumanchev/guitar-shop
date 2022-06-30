@@ -1,4 +1,4 @@
-import { GuitarType } from '../const';
+import { GuitarType } from '../constants/const';
 import { GuitarDTO, GuitarTypes } from '../types/guitar';
 
 export const getNumberImage = (guitar: GuitarDTO) => {

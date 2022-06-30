@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Pagination from './pagination';
-import { AppRoute, CARDS_PER_PAGE } from '../../../const';
+import { AppRoute, CARDS_PER_PAGE } from '../../../constants/const';
 
 describe('Component: Pagination', () => {
   it('Должен быть корректный рендер', () => {

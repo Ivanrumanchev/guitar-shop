@@ -12,7 +12,7 @@ import Reviews from './reviews';
 import { createAPI } from '../../../services/api';
 import { fetchReviews, setTotalReviewsCount } from '../../../store/reviews-data/reviews-data';
 import { makeFakeCatalogData, makeFakeProductData, makeFakeReviewsData } from '../../../utils/mocks';
-import { APIRoute, LoadingStatus, ModalType, NameSpace, REVIEW_PER_STEP } from '../../../const';
+import { APIRoute, LoadingStatus, ModalType, NameSpace, REVIEW_PER_STEP } from '../../../constants/const';
 import { State } from '../../../types/store';
 
 describe('Component: Reviews', () => {

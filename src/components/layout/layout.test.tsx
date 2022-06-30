@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import { LoadingStatus } from '../../const';
+import { LoadingStatus } from '../../constants/const';
 import { makeFakeCatalogData, makeFakeProductData } from '../../utils/mocks';
 import Layout from './layout';
 

@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import ModalReviewSuccess from './modal-review-success';
 import ModalLayout from '../modal-layout/modal-layout';
 import { makeFakeCatalogData, makeFakeProductData } from '../../../utils/mocks';
-import { NameSpace, LoadingStatus, ModalType } from '../../../const';
+import { NameSpace, LoadingStatus, ModalType } from '../../../constants/const';
 
 describe('Component: ModalReviewSuccess', () => {
   const mockStore = configureMockStore();

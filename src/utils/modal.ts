@@ -1,4 +1,4 @@
-import { ModalType } from '../const';
+import { ModalType } from '../constants/const';
 
 export const getHeightModal = (type: ModalType | null) => {
   switch (type) {

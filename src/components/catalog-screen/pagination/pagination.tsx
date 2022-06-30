@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { CARDS_PER_PAGE } from '../../../const';
+import { Link, useLocation } from 'react-router-dom';
+import { CARDS_PER_PAGE } from '../../../constants/const';
 
 type PaginationProps = {
   totalCount: number;
@@ -10,6 +10,8 @@ type PaginationProps = {
 const STEP = 1;
 
 function Pagination({ totalCount, currentPage, path }: PaginationProps): JSX.Element {
+  const location = useLocation();
+
   const quantityPages = Math.ceil(totalCount / CARDS_PER_PAGE);
 
   const pageNumbers = Array.from({ length: quantityPages }, (v, k) => k + 1);
@@ -24,7 +26,7 @@ function Pagination({ totalCount, currentPage, path }: PaginationProps): JSX.Ele
         <li className="pagination__page pagination__page--prev" id="prev">
           <Link
             className="link pagination__page-link"
-            to={ `${path}/${currentPage - STEP}` }
+            to={ `${path}/${currentPage - STEP}${location.search}` }
           >
             Назад
           </Link>
@@ -34,7 +36,7 @@ function Pagination({ totalCount, currentPage, path }: PaginationProps): JSX.Ele
           <li className="pagination__page" key={ pageNumber }>
             <Link
               className={ `link pagination__page-link ${currentPage === pageNumber ? 'pagination__page--active' : ''}` }
-              to={ `${path}/${pageNumber}` }
+              to={ `${path}/${pageNumber}${location.search}` }
             >
               { pageNumber }
             </Link>
@@ -45,7 +47,7 @@ function Pagination({ totalCount, currentPage, path }: PaginationProps): JSX.Ele
         <li className="pagination__page pagination__page--next" id="next">
           <Link
             className="link pagination__page-link"
-            to={ `${path}/${currentPage + STEP}` }
+            to={ `${path}/${currentPage + STEP}${location.search}` }
           >
             Далее
           </Link>

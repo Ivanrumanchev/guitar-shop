@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import * as Yup from 'yup';
 import { useAppDispatch } from '../../../hooks/store';
 import { postReviewAction } from '../../../store/api-actions';
-import { Rating, RequiredFieldMessage } from '../../../const';
+import { Rating, RequiredFieldMessage } from '../../../constants/const';
 import './new-review-form.css';
 
 type NewReviewFormProps = {

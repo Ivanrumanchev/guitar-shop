@@ -4,7 +4,7 @@ import Rate from '../../common/rate/rate';
 import { useAppDispatch } from '../../../hooks/store';
 import { fetchReviewsTotalCountAction } from '../../../store/api-actions';
 import { getNumberImage, getPrice } from '../../../utils/common';
-import { AppRoute } from '../../../const';
+import { AppRoute } from '../../../constants/const';
 import { GuitarDTO } from '../../../types/guitar';
 
 type CardItemProps = {

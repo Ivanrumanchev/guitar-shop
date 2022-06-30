@@ -3,7 +3,7 @@ import Tabs from '../../../components/product-screen/tabs/tabs';
 import { useAppSelector } from '../../../hooks/store';
 import { totalCountReviewsSelector } from '../../../store/selectors';
 import { getNumberImage, getPrice } from '../../../utils/common';
-import { BroadcrumbsName } from '../../../const';
+import { BroadcrumbsName } from '../../../constants/const';
 import { GuitarDTO } from '../../../types/guitar';
 
 type ProductCardProps = {

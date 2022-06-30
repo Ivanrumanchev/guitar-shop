@@ -7,7 +7,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ModalCloseButton from './modal-close-button';
 import { createAPI } from '../../../services/api';
-import { NameSpace } from '../../../const';
+import { NameSpace } from '../../../constants/const';
 import { State } from '../../../types/store';
 
 describe('Component: ModalCloseButton', () => {

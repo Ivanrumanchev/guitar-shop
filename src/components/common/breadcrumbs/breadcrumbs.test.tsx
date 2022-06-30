@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import Breadcrumbs from './breadcrumbs';
-import { AppRoute, BroadcrumbsName } from '../../../const';
+import { AppRoute, BroadcrumbsName } from '../../../constants/const';
 
 describe('Component: Breadcrumbs', () => {
   const breadcrumbs = [

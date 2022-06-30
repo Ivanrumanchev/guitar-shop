@@ -1,4 +1,4 @@
-import { GuitarType } from '../const';
+import { GuitarType } from '../constants/const';
 
 export type GuitarDTO = {
   id: number,
