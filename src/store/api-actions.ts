@@ -9,7 +9,7 @@ import { addNewReview, fetchReviews, setReviewsLoading, setTotalReviewsCount } f
 import { ApiActions, APIRoute, HttpCode, LoadingStatus, ModalType } from '../constants/const';
 import { GuitarDTO } from '../types/guitar';
 import { NewReview, ReviewDTO } from '../types/review';
-import { GuitarRequest, ReviewRequest } from '../types/api-action';
+import { GuitarRequest, ParamsWithString, ReviewRequest } from '../types/api-action';
 
 export const fetchGuitarsAction = createAsyncThunk<
   void,
@@ -139,16 +139,16 @@ export const postReviewAction = createAsyncThunk<
 
 export const searchGuitarsAction = createAsyncThunk<
   GuitarDTO,
-  string,
+  ParamsWithString,
   {
     dispatch: AppDispatch,
     extra: AxiosInstance
   }
->(ApiActions.FetchSearchingGuitar, async (name, { extra: api }) => {
+>(ApiActions.FetchSearchingGuitar, async ({ params, rest }, { extra: api }) => {
   try {
-    const path = `${APIRoute.Catalog}?name_like=${name}`;
+    const path = `${APIRoute.Catalog}${rest ? `/?${rest}` : ''}`;
 
-    const { data } = await api.get(path);
+    const { data } = await api.get(path, { params });
 
     return data;
   } catch (error) {

@@ -35,6 +35,12 @@ export const getGuitarType = (guitar: GuitarDTO) => {
   return '';
 };
 
+export const getGuitarTypeName = (type: string) => {
+  const typeKey = `${ type.slice(0, 1).toUpperCase()}${type.slice(1)}`;
+
+  return isValidType(typeKey) ? GuitarType[typeKey] : type;
+};
+
 export const getFormattedDate = (date: string) => {
   if (!date) {
     return '';

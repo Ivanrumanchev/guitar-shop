@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { searchGuitarsAction } from '../../../store/api-actions';
 import { useAppDispatch } from '../../../hooks/store';
 import { AppRoute } from '../../../constants/const';
+import { ParamKey } from '../../../constants/params';
 import { GuitarDTO } from '../../../types/guitar';
 
 function FormSearch(): JSX.Element {
@@ -18,7 +19,11 @@ function FormSearch(): JSX.Element {
 
     text = text.replace(/\\/g, '');
 
-    const guitars = await dispatch(searchGuitarsAction(text));
+    const params = {
+      [ParamKey.Like]: text,
+    };
+
+    const guitars = await dispatch(searchGuitarsAction({ params }));
 
     if (guitars.payload instanceof Array) {
       setFoundGuitars(guitars.payload);

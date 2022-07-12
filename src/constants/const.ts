@@ -61,6 +61,19 @@ export enum GuitarType {
   Ukulele = 'Укулеле',
 }
 
+export const enum GuitarTypeName {
+  Acoustic = 'acoustic',
+  Electric = 'electric',
+  Ukulele = 'ukulele',
+}
+
+export enum StringVariants {
+  FourStrings = '4-strings',
+  SixStrings = '6-strings',
+  SevenStrings = '7-strings',
+  TwelveStrings = '12-strings',
+}
+
 export const REVIEW_PER_STEP = 3;
 
 export const INITIAL_NUMBER_REVIEW = 0;

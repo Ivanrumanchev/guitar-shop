@@ -9,3 +9,12 @@ export type ReviewRequest = {
   start: number,
   end: number,
 }
+
+export type Params = {
+  [key: string] : string,
+}
+
+export type ParamsWithString = {
+  params: Params,
+  rest?: string,
+}
