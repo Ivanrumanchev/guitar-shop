@@ -3,7 +3,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { createAPI } from '../services/api';
-import { fetchGuitarsAction, fetchProductAction, fetchReviewsAction, fetchReviewsTotalCountAction, postReviewAction } from './api-actions';
+import { fetchGuitarsAction, fetchProductAction, fetchReviewsAction, fetchReviewsTotalCountAction, postReviewAction, searchGuitarsAction } from './api-actions';
 import { fetchGuitars } from './catalog-data/catalog-data';
 import { fetchProduct } from './product-data/product-data';
 import { addNewReview, fetchReviews, setTotalReviewsCount } from './reviews-data/reviews-data';
@@ -11,6 +11,8 @@ import { setOpenModal } from './state-app/state-app';
 import { makeFakeCatalogData, makeFakeNewReviewData, makeFakeProductData, makeFakeReviewsData } from '../utils/mocks';
 import { APIRoute } from '../constants/const';
 import { State } from '../types/store';
+import { ParamKey, ParamValue } from '../constants/params';
+import { Params } from '../types/api-action';
 
 describe('Async actions', () => {
   const api = createAPI();
@@ -111,5 +113,28 @@ describe('Async actions', () => {
 
     expect(actions).toContain(setOpenModal.toString());
     expect(actions).toContain(addNewReview.toString());
+  });
+
+  it('Должен вернуть гитары по нужным параметрам когда сервер возвращает 200', async () => {
+    const mockGuitarsData = makeFakeCatalogData();
+    const FIRST_GUITAR_NUMBER = '0';
+    const LIMIT_GUITAR = '1';
+
+    const configLow: Params = {
+      [ParamKey.Start]: FIRST_GUITAR_NUMBER,
+      [ParamKey.Limit]: LIMIT_GUITAR,
+      [ParamKey.Sort]: ParamValue.Price,
+      [ParamKey.Order]: ParamValue.Asc,
+    };
+
+    mockAPI
+      .onGet(APIRoute.Catalog)
+      .reply(200, mockGuitarsData);
+
+    const store = mockStore();
+
+    const res = await store.dispatch(searchGuitarsAction({params: configLow}));
+
+    expect(res.payload).toEqual(mockGuitarsData);
   });
 });
