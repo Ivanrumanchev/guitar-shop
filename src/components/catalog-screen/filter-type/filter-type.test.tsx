@@ -1,6 +1,6 @@
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import FilterType from './filter-type';
 import { ParamKey } from '../../../constants/params';
 import { GuitarTypeName } from '../../../constants/const';
@@ -40,25 +40,37 @@ describe('Component: FilterType', () => {
     expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Acoustic}`)).toEqual(false);
     fireEvent.click(inputAcoustic);
     expect(inputAcoustic.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.Type}=${GuitarTypeName.Acoustic}`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.Type}=${GuitarTypeName.Acoustic}`);
+    });
     fireEvent.click(inputAcoustic);
     expect(inputAcoustic.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Acoustic}`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Acoustic}`)).toEqual(false);
+    });
 
     expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Electric}`)).toEqual(false);
     fireEvent.click(inputElectric);
     expect(inputElectric.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.Type}=${GuitarTypeName.Electric}`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.Type}=${GuitarTypeName.Electric}`);
+    });
     fireEvent.click(inputElectric);
     expect(inputElectric.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Electric}`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Electric}`)).toEqual(false);
+    });
 
     expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Ukulele}`)).toEqual(false);
     fireEvent.click(inputUkulele);
     expect(inputUkulele.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.Type}=${GuitarTypeName.Ukulele}`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.Type}=${GuitarTypeName.Ukulele}`);
+    });
     fireEvent.click(inputUkulele);
     expect(inputUkulele.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Ukulele}`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.Type}=${GuitarTypeName.Ukulele}`)).toEqual(false);
+    });
   });
 });

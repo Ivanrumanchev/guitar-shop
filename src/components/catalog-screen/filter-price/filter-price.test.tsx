@@ -74,8 +74,13 @@ describe('Component: FilterPrice', () => {
       expect(screen.getByText(/Цена, ₽/)).toBeInTheDocument();
     });
 
-    expect(screen.getByText(/Максимальная цена/)).toBeInTheDocument();
-    expect(screen.getByText(/Минимальная цена/)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/Максимальная цена/)).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText(/Минимальная цена/)).toBeInTheDocument();
+    });
   });
 
   it('После рендера должен быть диспатч и отрисовка минимальной и максимальной цены из запроса', async () => {
@@ -95,7 +100,7 @@ describe('Component: FilterPrice', () => {
     render(
       <Provider store={ store }>
         <Router location={ history.location } navigator={ history }>
-          <FilterPrice />,
+          <FilterPrice />
         </Router>
       </Provider>,
     );
@@ -104,9 +109,7 @@ describe('Component: FilterPrice', () => {
       expect(screen.getAllByPlaceholderText(mockGuitarsData[0].price)[0]).toBeInTheDocument();
     });
 
-    await waitFor(() => {
-      expect(screen.getAllByPlaceholderText(mockGuitarsData[0].price)[1]).toBeInTheDocument();
-    });
+    expect(screen.getAllByPlaceholderText(mockGuitarsData[0].price)[1]).toBeInTheDocument();
   });
 
   it('При вводе значения, меньшего минимальной цены, цена должна стать равной минимальной, в адресной строке должны появиться query параметры', async () => {
@@ -139,11 +142,16 @@ describe('Component: FilterPrice', () => {
 
     fireEvent.change(input, {target: {value: `${mockGuitarsData[0].price - 5000}`}});
 
-    expect(input.value).toBe(`${mockGuitarsData[0].price - 5000}`);
+    await waitFor(() => {
+      expect(input.value).toBe(`${mockGuitarsData[0].price - 5000}`);
+    });
 
     fireEvent.blur(input);
 
-    expect(input.value).toBe(mockGuitarsData[0].price.toString());
+    await waitFor(() => {
+      expect(input.value).toBe(mockGuitarsData[0].price.toString());
+    });
+
     expect(history.location.search).toContain(`${ParamKey.PriceGte}=${mockGuitarsData[0].price}`);
   });
 
@@ -177,11 +185,16 @@ describe('Component: FilterPrice', () => {
 
     fireEvent.change(input, {target: {value: `${mockGuitarsData[0].price + 5000}`}});
 
-    expect(input.value).toBe(`${mockGuitarsData[0].price + 5000}`);
+    await waitFor(() => {
+      expect(input.value).toBe(`${mockGuitarsData[0].price + 5000}`);
+    });
 
     fireEvent.blur(input);
 
-    expect(input.value).toBe(mockGuitarsData[0].price.toString());
+    await waitFor(() => {
+      expect(input.value).toBe(mockGuitarsData[0].price.toString());
+    });
+
     expect(history.location.search).toContain(`${ParamKey.PriceLte}=${mockGuitarsData[0].price}`);
   });
 });

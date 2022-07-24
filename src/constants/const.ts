@@ -89,3 +89,5 @@ export const enum RequiredFieldMessage {
   Text = 'Заполните поле',
   Radio = 'Поставьте оценку',
 }
+
+export const DEBOUNCE_DELAY = 300;

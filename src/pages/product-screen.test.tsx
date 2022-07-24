@@ -54,7 +54,7 @@ describe('Component: ProductScreen', () => {
     useDispatchMock.mockClear();
   });
 
-  it('Должен быть корректный рендер', () => {
+  it('Должен быть корректный рендер', async () => {
     let store = mockStore({
       ...initialState,
     });
@@ -75,7 +75,9 @@ describe('Component: ProductScreen', () => {
 
     const guitarName = name ? name : BroadcrumbsName.Product;
 
-    expect(screen.getAllByText(guitarName).length).toBe(3);
+    await waitFor(() => {
+      expect(screen.getAllByText(guitarName).length).toBe(3);
+    });
 
     store = mockStore({
       ...initialState,

@@ -22,7 +22,7 @@ export const fetchGuitarsAction = createAsyncThunk<
   dispatch(setCatalogLoading(LoadingStatus.Pending));
 
   try {
-    const path = `${APIRoute.Catalog}/?_start=${start}&_end=${end}${rest ? `&${rest}` : ''}`;
+    const path = `${APIRoute.Catalog}/?_start=${start}&_end=${end}&_embed=comments${rest ? `&${rest}` : ''}`;
 
     const { data, headers } = await api.get<GuitarDTO[]>(path);
 
@@ -61,29 +61,6 @@ export const fetchProductAction = createAsyncThunk<
   }
 
   dispatch(setProductLoading(LoadingStatus.Idle));
-});
-
-export const fetchReviewsTotalCountAction = createAsyncThunk<
-  number,
-  number,
-  {
-    dispatch: AppDispatch,
-    extra: AxiosInstance
-  }
->(ApiActions.FetchTotalCountReviews, async (id, { extra: api }) => {
-  try {
-    const path = `${APIRoute.Catalog}/${id}/comments/?_start=0&_end=1`;
-
-    const { headers } = await api.get(path);
-
-    const total = headers['x-total-count'];
-
-    return +total;
-  } catch (error) {
-    errorServerHandle(error);
-
-    return 0;
-  }
 });
 
 export const fetchReviewsAction = createAsyncThunk<

@@ -1,3 +1,4 @@
+import { ReviewDTO } from './review';
 import { GuitarType } from '../constants/const';
 
 export type GuitarDTO = {
@@ -10,6 +11,7 @@ export type GuitarDTO = {
   stringCount: number,
   rating: number,
   price: number,
+  comments?: ReviewDTO[],
 };
 
 export type GuitarTypes = keyof typeof GuitarType;

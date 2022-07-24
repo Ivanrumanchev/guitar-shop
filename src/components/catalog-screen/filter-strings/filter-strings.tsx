@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { stringsDisabledMapper } from '../../../utils/filter';
-import { GuitarTypeName, StringVariants } from '../../../constants/const';
+import { DEBOUNCE_DELAY, GuitarTypeName, StringVariants } from '../../../constants/const';
 import { ParamKey } from '../../../constants/params';
 import { CheckSetStringsMapper, CheckStringsMapper } from '../../../types/filter';
 
@@ -78,7 +79,9 @@ function FilterStrings(): JSX.Element {
         .forEach((param) => param ? searchParams.append(ParamKey.StringCount, param) : '');
     }
 
-    setSearchParams(searchParams);
+    const setSearchParamsDebounced = _.debounce((searchParamsArg: URLSearchParams) => setSearchParams(searchParamsArg), DEBOUNCE_DELAY);
+
+    setSearchParamsDebounced(searchParams);
   };
 
   return (

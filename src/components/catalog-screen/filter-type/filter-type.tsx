@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getGuitarTypeName } from '../../../utils/common';
-import { GuitarTypeName } from '../../../constants/const';
+import { DEBOUNCE_DELAY, GuitarTypeName } from '../../../constants/const';
 import { ParamKey } from '../../../constants/params';
 import { CheckSetTypeMapper, CheckTypeMapper } from '../../../types/filter';
 
@@ -63,7 +64,9 @@ function FilterType(): JSX.Element {
         .forEach((param) => searchParams.append(ParamKey.Type, param));
     }
 
-    setSearchParams(searchParams);
+    const setSearchParamsDebounced = _.debounce((searchParamsArg: URLSearchParams) => setSearchParams(searchParamsArg), DEBOUNCE_DELAY);
+
+    setSearchParamsDebounced(searchParams);
   };
 
   return (

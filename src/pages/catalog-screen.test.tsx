@@ -54,7 +54,7 @@ describe('Component: CatalogScreen', () => {
     useDispatchMock.mockClear();
   });
 
-  it('Должен быть корректный рендер', () => {
+  it('Должен быть корректный рендер', async () => {
     const store = mockStore({
       ...initialState,
     });
@@ -71,7 +71,9 @@ describe('Component: CatalogScreen', () => {
       </Provider>,
     );
 
-    expect(screen.getByText(/Каталог гитар/)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText(/Каталог гитар/)).toBeInTheDocument();
+    });
   });
 
   it('После загрузки компонента должен быть диспатч', async () => {
@@ -88,7 +90,7 @@ describe('Component: CatalogScreen', () => {
       end: 9,
     };
 
-    const path = `${APIRoute.Catalog}/?_start=${guitarRequest.start}&_end=${guitarRequest.end}`;
+    const path = `${APIRoute.Catalog}/?_start=${guitarRequest.start}&_end=${guitarRequest.end}&_embed=comments`;
 
     mockAPI
       .onGet(path)

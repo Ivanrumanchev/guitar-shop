@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 import FormSearch from './form-search';
 import { createAPI } from '../../../services/api';
 import { makeFakeCatalogData, makeFakeProductData, makeFakeReviewsData } from '../../../utils/mocks';
-import { APIRoute, LoadingStatus } from '../../../constants/const';
+import { APIRoute, AppRoute, LoadingStatus } from '../../../constants/const';
 import { State } from '../../../types/store';
 
 describe('Component: FormSearch', () => {
@@ -145,5 +145,42 @@ describe('Component: FormSearch', () => {
     fireEvent.click(resetButton);
 
     expect(screen.queryByText(mockGuitarsData[0].name)).not.toBeInTheDocument();
+  });
+
+  it('При нажатии на предложение из выпадающего списка, должнен быть редирект', async () => {
+    const mockGuitarsData = makeFakeCatalogData();
+    const history = createMemoryHistory();
+
+    mockAPI
+      .onGet(APIRoute.Catalog)
+      .reply(200, mockGuitarsData);
+
+    const store = mockStore({
+      ...initialState,
+    });
+
+    useDispatchMock.mockReturnValue(store.dispatch);
+
+    render(
+      <Provider store={ store }>
+        <Router location={ history.location } navigator={ history }>
+          <FormSearch />
+        </Router>
+      </Provider>,
+    );
+
+    const input = screen.getByPlaceholderText('что вы ищите?') as HTMLInputElement;
+
+    fireEvent.change(input, {target: {value: 1}});
+
+    await waitFor(() => {
+      expect(screen.getByText(mockGuitarsData[0].name)).toBeInTheDocument();
+    });
+
+    const searchedGuitar = screen.getByText(mockGuitarsData[0].name);
+
+    fireEvent.click(searchedGuitar);
+
+    expect(history.location.pathname).toBe(`${AppRoute.Product}/${mockGuitarsData[0].id}`);
   });
 });

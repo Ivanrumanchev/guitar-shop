@@ -1,6 +1,6 @@
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import FilterStrings from './filter-strings';
 import { ParamKey } from '../../../constants/params';
 import { APIRoute, GuitarTypeName } from '../../../constants/const';
@@ -42,34 +42,50 @@ describe('Component: FilterStrings', () => {
     expect(history.location.search.includes(`${ParamKey.StringCount}=4`)).toEqual(false);
     fireEvent.click(inputFourStrings);
     expect(inputFourStrings.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.StringCount}=4`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.StringCount}=4`);
+    });
     fireEvent.click(inputFourStrings);
     expect(inputFourStrings.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.StringCount}=4`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.StringCount}=4`)).toEqual(false);
+    });
 
     expect(history.location.search.includes(`${ParamKey.StringCount}=6`)).toEqual(false);
     fireEvent.click(inputSixStrings);
     expect(inputSixStrings.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.StringCount}=6`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.StringCount}=6`);
+    });
     fireEvent.click(inputSixStrings);
     expect(inputSixStrings.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.StringCount}=6`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.StringCount}=6`)).toEqual(false);
+    });
 
     expect(history.location.search.includes(`${ParamKey.StringCount}=7`)).toEqual(false);
     fireEvent.click(inputSevenStrings);
     expect(inputSevenStrings.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.StringCount}=7`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.StringCount}=7`);
+    });
     fireEvent.click(inputSevenStrings);
     expect(inputSevenStrings.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.StringCount}=7`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.StringCount}=7`)).toEqual(false);
+    });
 
     expect(history.location.search.includes(`${ParamKey.StringCount}=12`)).toEqual(false);
     fireEvent.click(inputTwelveStrings);
     expect(inputTwelveStrings.checked).toEqual(true);
-    expect(history.location.search).toContain(`${ParamKey.StringCount}=12`);
+    await waitFor(() => {
+      expect(history.location.search).toContain(`${ParamKey.StringCount}=12`);
+    });
     fireEvent.click(inputTwelveStrings);
     expect(inputTwelveStrings.checked).toEqual(false);
-    expect(history.location.search.includes(`${ParamKey.StringCount}=12`)).toEqual(false);
+    await waitFor(() => {
+      expect(history.location.search.includes(`${ParamKey.StringCount}=12`)).toEqual(false);
+    });
   });
 
   it('Проверка логики блокировки чекбоксов при выборе типов гитар', async () => {

@@ -3,7 +3,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { createAPI } from '../services/api';
-import { fetchGuitarsAction, fetchProductAction, fetchReviewsAction, fetchReviewsTotalCountAction, postReviewAction, searchGuitarsAction } from './api-actions';
+import { fetchGuitarsAction, fetchProductAction, fetchReviewsAction, postReviewAction, searchGuitarsAction } from './api-actions';
 import { fetchGuitars } from './catalog-data/catalog-data';
 import { fetchProduct } from './product-data/product-data';
 import { addNewReview, fetchReviews, setTotalReviewsCount } from './reviews-data/reviews-data';
@@ -30,7 +30,7 @@ describe('Async actions', () => {
     const guitarRequest = { start: 0, end: 9 };
 
     mockAPI
-      .onGet(`${APIRoute.Catalog}/?_start=${guitarRequest.start}&_end=${guitarRequest.end}`)
+      .onGet(`${APIRoute.Catalog}/?_start=${guitarRequest.start}&_end=${guitarRequest.end}&_embed=comments`)
       .reply(200, mockCatalogData, { 'x-total-count': '3' });
 
     const store = mockStore();
@@ -57,22 +57,6 @@ describe('Async actions', () => {
     const actions = store.getActions().map(({ type }) => type);
 
     expect(actions).toContain(fetchProduct.toString());
-  });
-
-  it('Должен вернуть кол-во отзывов когда сервер возвращает 200', async () => {
-    const mockReviewsData = makeFakeReviewsData();
-    const id = 2;
-    const total = 5;
-
-    mockAPI
-      .onGet(`${APIRoute.Catalog}/${id}/comments/?_start=0&_end=1`)
-      .reply(200, mockReviewsData, { 'x-total-count': total });
-
-    const store = mockStore();
-
-    const res = await store.dispatch(fetchReviewsTotalCountAction(id));
-
-    expect(res.payload).toEqual(total);
   });
 
   it('Должен записать в стор кол-во отзывов и сами отзывы когда сервер возвращает 200', async () => {
